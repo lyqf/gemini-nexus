@@ -15,6 +15,7 @@
             <div class="toolbar" id="toolbar">
                 <button class="btn" id="btn-ask" title="Ask AI">${ICONS.LOGO}</button>
                 <button class="btn" id="btn-copy" title="Copy">${ICONS.COPY}</button>
+                <button class="btn hidden" id="btn-grammar" title="Fix Grammar">${ICONS.GRAMMAR}</button>
                 <button class="btn" id="btn-translate" title="Translate">${ICONS.TRANSLATE}</button>
                 <button class="btn" id="btn-explain" title="Explain">${ICONS.EXPLAIN}</button>
                 <button class="btn" id="btn-summarize" title="Summarize">${ICONS.SUMMARIZE}</button>
@@ -59,6 +60,12 @@
                             </button>
                         </div>
                         <div class="footer-right">
+                            <button class="footer-btn text-btn hidden" id="btn-insert" title="Insert at cursor">
+                                ${ICONS.INSERT} <span>Insert</span>
+                            </button>
+                            <button class="footer-btn text-btn hidden" id="btn-replace" title="Replace selected text">
+                                ${ICONS.REPLACE} <span>Replace</span>
+                            </button>
                              <button class="footer-btn" id="btn-copy-result" title="Copy Result">
                                 ${ICONS.COPY}
                             </button>

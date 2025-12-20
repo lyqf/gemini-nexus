@@ -47,6 +47,9 @@
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
+        .btn.hidden {
+            display: none;
+        }
 
         /* Image Hover Button */
         .image-btn {

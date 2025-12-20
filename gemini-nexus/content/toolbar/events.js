@@ -13,6 +13,7 @@
             // --- Toolbar Buttons ---
             this._add(buttons.copySelection, 'mousedown', (e) => this.controller.triggerAction(e, 'copy_selection'));
             this._add(buttons.ask, 'mousedown', (e) => this.controller.triggerAction(e, 'ask'));
+            this._add(buttons.grammar, 'mousedown', (e) => this.controller.triggerAction(e, 'grammar'));
             this._add(buttons.translate, 'mousedown', (e) => this.controller.triggerAction(e, 'translate'));
             this._add(buttons.explain, 'mousedown', (e) => this.controller.triggerAction(e, 'explain'));
             this._add(buttons.summarize, 'mousedown', (e) => this.controller.triggerAction(e, 'summarize'));
@@ -37,6 +38,12 @@
             }
             if (buttons.retry) {
                 this._add(buttons.retry, 'click', (e) => this.controller.retryAsk(e));
+            }
+            if (buttons.insert) {
+                this._add(buttons.insert, 'click', (e) => this.controller.insertResult(e));
+            }
+            if (buttons.replace) {
+                this._add(buttons.replace, 'click', (e) => this.controller.replaceResult(e));
             }
 
             // --- Input ---

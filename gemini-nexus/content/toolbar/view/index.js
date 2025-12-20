@@ -40,6 +40,7 @@
                 buttons: {
                     copySelection: get('btn-copy'),
                     ask: get('btn-ask'),
+                    grammar: get('btn-grammar'),
                     translate: get('btn-translate'),
                     explain: get('btn-explain'),
                     summarize: get('btn-summarize'),
@@ -47,7 +48,9 @@
                     stop: get('btn-stop-gen'),
                     continue: get('btn-continue-chat'),
                     copy: get('btn-copy-result'),
-                    retry: get('btn-retry')
+                    retry: get('btn-retry'),
+                    insert: get('btn-insert'),
+                    replace: get('btn-replace')
                 }
             };
         }

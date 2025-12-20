@@ -21,6 +21,9 @@
             this.callbacks = {};
             this.isBuilt = false;
             this.currentResultText = '';
+            this.sourceInputElement = null;
+            this.sourceSelectionRange = null;
+            this.isGrammarMode = false;
         }
 
         setCallbacks(callbacks) {
@@ -118,6 +121,18 @@
             }
         }
 
+        insertResult(e) {
+            e.preventDefault(); e.stopPropagation();
+            if (!this.currentResultText) return;
+            this._fireCallback('onAction', 'insert_result', this.currentResultText);
+        }
+
+        replaceResult(e) {
+            e.preventDefault(); e.stopPropagation();
+            if (!this.currentResultText) return;
+            this._fireCallback('onAction', 'replace_result', this.currentResultText);
+        }
+
         saveWindowDimensions(w, h) {
             chrome.storage.local.set({ 'gemini_nexus_window_size': { w, h } });
         }
@@ -159,6 +174,10 @@
         showResult(text, title, isStreaming) {
             this.currentResultText = text;
             this.view.showResult(text, title, isStreaming);
+            // Show Insert/Replace buttons after streaming is done in grammar mode
+            if (!isStreaming && this.isGrammarMode && this.sourceInputElement) {
+                this.showInsertReplaceButtons(true);
+            }
         }
 
         showError(text) {
@@ -167,10 +186,48 @@
 
         hideAskWindow() {
             this.view.hideAskWindow();
+            this.resetGrammarMode();
         }
 
         setInputValue(text) {
             this.view.setInputValue(text);
+        }
+
+        setGrammarMode(enabled, sourceElement = null, selectionRange = null) {
+            this.isGrammarMode = enabled;
+            this.sourceInputElement = sourceElement;
+            this.sourceSelectionRange = selectionRange;
+        }
+
+        resetGrammarMode() {
+            this.isGrammarMode = false;
+            this.sourceInputElement = null;
+            this.sourceSelectionRange = null;
+            this.showInsertReplaceButtons(false);
+        }
+
+        showInsertReplaceButtons(show) {
+            const { buttons } = this.view.elements;
+            if (buttons.insert) {
+                buttons.insert.classList.toggle('hidden', !show);
+            }
+            if (buttons.replace) {
+                buttons.replace.classList.toggle('hidden', !show);
+            }
+        }
+
+        getSourceInfo() {
+            return {
+                element: this.sourceInputElement,
+                range: this.sourceSelectionRange
+            };
+        }
+
+        showGrammarButton(show) {
+            const { buttons } = this.view.elements;
+            if (buttons.grammar) {
+                buttons.grammar.classList.toggle('hidden', !show);
+            }
         }
 
         showCopySelectionFeedback(success) {

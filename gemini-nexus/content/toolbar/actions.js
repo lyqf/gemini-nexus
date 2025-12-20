@@ -27,11 +27,11 @@ class ToolbarActions {
 
     async handleQuickAction(actionType, selection, rect) {
         const prompt = this.getPrompt(actionType, selection);
-        
+
         let title = '解释';
         let inputPlaceholder = '解释选中内容';
         let loadingMsg = 'Explaining...';
-        
+
         if (actionType === 'translate') {
             title = '翻译';
             inputPlaceholder = '翻译选中内容';
@@ -40,12 +40,16 @@ class ToolbarActions {
             title = '总结';
             inputPlaceholder = '总结选中内容';
             loadingMsg = 'Summarizing...';
+        } else if (actionType === 'grammar') {
+            title = '语法修正';
+            inputPlaceholder = '修正语法';
+            loadingMsg = 'Fixing grammar...';
         }
-        
+
         this.ui.hide();
         await this.ui.showAskWindow(rect, selection, title);
         this.ui.showLoading(loadingMsg);
-        
+
         this.ui.setInputValue(inputPlaceholder);
 
         const msg = {
@@ -104,6 +108,8 @@ class ToolbarActions {
                 return `用通俗易懂的语言简要解释以下内容：\n\n"${payload}"`;
             case 'summarize':
                 return `请尽量简洁地总结以下内容：\n\n"${payload}"`;
+            case 'grammar':
+                return `请修正以下文本的语法和拼写错误，保持原意不变。仅输出修正后的文本，不要添加任何解释：\n\n"${payload}"`;
             default:
                 return payload;
         }

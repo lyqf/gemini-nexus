@@ -251,6 +251,23 @@
             font-weight: 500;
         }
 
+        .footer-btn.text-btn.primary {
+            background: #0b57d0;
+            color: #fff;
+        }
+        .footer-btn.text-btn.primary:hover {
+            background: #0842a0;
+        }
+
+        #btn-insert, #btn-replace {
+            background: #e8f0fe;
+            color: #0b57d0;
+            border: 1px solid #0b57d0;
+        }
+        #btn-insert:hover, #btn-replace:hover {
+            background: #d2e3fc;
+        }
+
         .footer-stop {
             width: 100%;
             display: flex;
